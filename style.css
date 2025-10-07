@@ -1,0 +1,187 @@
+:root {
+            --color-bg-dark: #0f0f0f;
+            --color-neon-blue: #00ffff;
+            --color-neon-magenta: #ff00ff;
+            --color-neon-green: #00ff00;
+            --color-text: var(--color-neon-green);
+            --shadow-intensity: 0 0 5px var(--color-neon-blue), 0 0 10px var(--color-neon-magenta);
+            --shadow-glow-button: 0 0 8px var(--color-neon-blue);
+            --shadow-glow-active: 0 0 12px var(--color-neon-magenta);
+            --pixel-border: 2px solid var(--color-neon-blue);
+            --pixel-font: 'Press Start 2P', monospace;
+        }
+        body {
+            font-family: var(--pixel-font);
+            background-color: var(--color-bg-dark);
+            color: var(--color-text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-shadow: 1px 1px 2px #000;
+            overflow-y: auto; 
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 4px, 4px 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .quiz-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: var(--pixel-border);
+            box-shadow: var(--shadow-intensity);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1, h2 {
+            text-align: center;
+            color: var(--color-neon-magenta);
+            text-shadow: 0 0 10px var(--color-neon-magenta);
+            margin-bottom: 20px;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        }
+        p {
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        button {
+            font-family: var(--pixel-font);
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            background-color: var(--color-bg-dark);
+            color: var(--color-neon-blue);
+            border: 2px solid var(--color-neon-blue);
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            box-shadow: var(--shadow-glow-button);
+            transition: all 0.1s ease-in-out;
+            outline: none;
+            border-radius: 4px; 
+            text-transform: uppercase;
+        }
+        button:hover:not([disabled]) {
+            background-color: var(--color-neon-blue);
+            color: var(--color-bg-dark);
+            box-shadow: var(--shadow-glow-active);
+        }
+
+        button:active:not([disabled]) {
+            transform: scale(0.98);
+        }
+        button[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            box-shadow: none;
+            border-color: #555;
+            color: #888;
+        }
+        .alternative-button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin: 8px 0;
+            padding: 15px;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            white-space: normal;
+        }
+        .alternative-button.selected {
+            background-color: rgba(0, 255, 255, 0.3);
+            border-color: var(--color-neon-magenta);
+            box-shadow: 0 0 10px var(--color-neon-magenta);
+        }
+        .alternative-button.correct {
+            background-color: rgba(0, 255, 0, 0.2);
+            border-color: var(--color-neon-green);
+            box-shadow: 0 0 10px var(--color-neon-green);
+            color: var(--color-neon-green);
+        }
+        .alternative-button.incorrect {
+            background-color: rgba(255, 0, 0, 0.2);
+            border-color: var(--color-neon-magenta);
+            box-shadow: 0 0 10px var(--color-neon-magenta);
+            color: var(--color-neon-magenta);
+        }
+        input[type="text"] {
+            font-family: var(--pixel-font);
+            width: calc(100% - 24px);
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-neon-blue);
+            color: var(--color-neon-green);
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            outline: none;
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            border-radius: 4px;
+        }
+        input[type="text"]:focus {
+            border-color: var(--color-neon-magenta);
+            box-shadow: 0 0 8px var(--color-neon-magenta);
+        }
+        .hidden {
+            display: none !important;
+        }
+        #results-area {
+            text-align: center;
+        }
+        .summary-box {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-neon-green);
+            padding: 15px;
+            margin: 20px 0;
+            display: inline-block;
+            text-align: left;
+            box-shadow: 0 0 8px var(--color-neon-green);
+            border-radius: 4px;
+        }
+        .summary-box p {
+            margin: 5px 0;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+        }
+        .summary-box span {
+            color: var(--color-neon-magenta);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--color-neon-magenta);
+        }
+        #performance-message {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dashed var(--color-neon-blue);
+            color: var(--color-neon-blue);
+            box-shadow: 0 0 5px var(--color-neon-blue);
+            background-color: rgba(0, 255, 255, 0.05);
+        }
+        .chart-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border: 1px solid var(--color-neon-green);
+            box-shadow: 0 0 10px var(--color-neon-green);
+            border-radius: 4px;
+        }
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 15px;
+                margin: 10px;
+            }
+            button {
+                padding: 8px 15px;
+                margin: 4px 0;
+            }
+        }
